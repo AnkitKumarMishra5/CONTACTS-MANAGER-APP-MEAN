@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+<div class="container">
+    <h1 class="display-4">RM-Phone Book Web App</h1>
+    <div style="width: 33.33%; margin: 0 auto;">
+        <h1 class="task-heading">Edit your contact</h1>
+            <form action="/contacts/<%=contact._id%>?_method=PUT" method="POST">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="contact[name]" value="<%=contact.name%>" autofocus required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="date" name="contact[dob]" value="<%=moment(contact.dob).format('YYYY-MM-DD')%>">
+                </div>
+                <div class="input-group phone_form">
+                    <input class="form-control" type="number" id="num1" onkeyPress="if(this.value.length==10) return false;" name="contact[phone][0]" value="<%=contact.phone[0]%>" required>
+                    <div class="input-group-append" id="add_phone" style="display: none;">
+                        <span class="input-group-text"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="input-group phone_form" style="display:<%=contact.phone[1] ? '' : 'none'%>;">
+                    <input class="form-control" type="number" id="num2" onkeyPress="if(this.value.length==10) return false;" name="contact[phone][1]" value="<%=contact.phone[1]%>">
+                    <div class="input-group-append" id="delete_phone">
+                        <span class="input-group-text"><i class="fa fa-trash"></i></span>
+                    </div>
+                </div>
+                <div class="input-group email_form">
+                    <input class="form-control phone_numbers" type="email" id="em1" name="contact[email][0]" value="<%=contact.email[0]%>" required>
+                    <div class="input-group-append" id="add_email" style="display: none;">
+                        <span class="input-group-text"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="input-group email_form" style="display:<%=contact.email[1] ? '' : 'none'%>;">
+                    <input class="form-control phone_numbers" type="email" id="em2" name="contact[email][1]" value="<%=contact.email[1]%>">
+                    <div class="input-group-append" id="delete_email">
+                        <span class="input-group-text"><i class="fa fa-trash"></i></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block submit_btn">Submit</button>
+                </div>
+            </form>
+            <a href="/contacts">Go Back</a>
+    </div>
+</div>
+<%- include('partials/footer') %>

@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+<div class="container">
+    <h1 class="display-4">RM-Phone Book Web App</h1>
+    <div style="width: 33.33%; margin: 0 auto;">
+        <h1 class="task-heading">Add a new contact</h1>
+            <form action="/contacts" method="POST">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="contact[name]" placeholder="Eg: Ankit Kumar" autofocus required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="date" name="contact[dob]">
+                </div>
+                <div class="input-group phone_form">
+                    <input class="form-control" type="number" onkeyPress="if(this.value.length==10) return false;" name="phone[0]" placeholder="Eg: 7587341212" required>
+                    <div class="input-group-append" id="add_phone" style="display: none;">
+                        <span class="input-group-text"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="input-group phone_form" style="display: none;">
+                    <input class="form-control" type="number" onkeypress="if(this.value.length==10) return false;" name="phone[1]" placeholder="Eg: 7587341212">
+                    <div class="input-group-append" id="delete_phone">
+                        <span class="input-group-text"><i class="fa fa-trash"></i></span>
+                    </div>
+                </div>
+                <div class="input-group email_form">
+                    <input class="form-control" type="email" name="email[0]" placeholder="Eg: ankit_test123@gmail.com" required>
+                    <div class="input-group-append" id="add_email" style="display: none;">
+                        <span class="input-group-text"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="input-group email_form" style="display: none;">
+                    <input class="form-control" type="email" name="email[1]" placeholder="Eg: ankit_test123@gmail.com">
+                    <div class="input-group-append" id="delete_email">
+                        <span class="input-group-text"><i class="fa fa-trash"></i></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block submit_btn">Submit</button>
+                </div>
+            </form>
+            <a href="/contacts">Go Back</a>
+    </div>
+</div>
+<%- include('partials/footer') %>

@@ -1,0 +1,94 @@
+<%- include('partials/header') %>
+<div class="container">
+    <h1 class="display-4">RM-Phone Book Web App</h1>
+    <div style="width: 50%; margin: 0 auto;">
+        <div class="add_contact" style="float: right;">
+            <a href="/contacts/new"><i class="fas fa-user-plus fa-2x"></i></a>
+        </div>
+        <h1 class="task-heading">View Contacts</h1>
+        <form class="form-inline d-flex justify-content-center md-form form-sm" style="margin-bottom: 10px;">
+            <input class="form-control form-control-sm mr-3 w-75" type="text" name="search" placeholder="Search" aria-label="Search">
+            <i class="fas fa-search" aria-hidden="true"></i>
+        </form>
+        <% contacts.forEach(function(contact){ %>
+        <div class="accordion" id="accordian1">
+            <div class="card">
+                <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#accordian<%=contact._id%>"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="mb-0 lead">
+                        <%= contact.name %>
+                    </h3>
+                </div>
+                <div id="accordian<%=contact._id%>" class="collapse" aria-labelledby="headingOne" data-parent="#accordian1">
+                    <div class="card-body">
+                        <div class="btn-group dropleft" role="group" style="float: right;">
+                            <button id="btnGroupDrop2" type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Options
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
+                                <a class="dropdown-item"
+                                href="/contacts/<%=contact._id%>/edit%>">
+                                Edit
+                                </a>
+                                <form id="delete-form" action="/contacts/<%=contact._id%>?_method=DELETE" method="POST">
+                                    <input type="submit" class="dropdown-item" value="Delete">
+                                </form>
+                            </div>
+                        </div>
+                        <i class="far fa-calendar-alt"></i>&emsp;<p class="text-muted" style="display: inline;"><%=moment(contact.dob).format('DD MMMM, YYYY');%></p>
+                        <table class="table table-hover mb-0" style="margin-top: 10px;">
+                            <tbody>
+                              <tr>
+                                <% contact.phone.forEach(function(phone){ %>
+                                    <% if(phone){%>
+                                    <td><i class="fas fa-phone-alt"></i>&emsp;<%=phone%></td>
+                                    <% } %>
+                                <% }) %>
+                              </tr>
+                              <tr>
+                                <% contact.email.forEach(function(email){ %>
+                                    <% if(email != ''){%>
+                                    <td><i class="far fa-envelope"></i>&emsp;<%=email%></td>
+                                    <% } %>
+                                <% }) %>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+        <% if (pages > 0) { %>
+        <ul class="pagination" style="float: right; margin: 25px auto;">
+            <% if (current == 1) { %>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <% } else { %>
+            <li class="page-item"><a class="page-link" href="/contacts/page/1">1</a></li>
+            <% } %>
+            <% var i = (Number(current) > 5 ? Number(current) - 3 : 2) %>
+            <% if (i !== 2) { %>
+            <li class="page-item"><a class="page-link">Previous</a></li>
+            <% } %>
+            <% for (; i <= (Number(current) + 3) && i < pages; i++) { %>
+            <% if (i == current) { %>
+            <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li>
+            <% } else { %>
+            <li class="page-item"><a class="page-link" href="/contacts/page/<%= i %>"><%= i %></a></li>
+            <% } %>
+            <% if (i == Number(current) + 3 && i < pages) { %>
+            <li class="page-item"><a class="page-link">Next</a></li>
+            <% } %>
+            <% } %>
+            <% if (pages != 1){ %>
+            <% if (current == pages) { %>
+            <li class="page-item active"><a class="page-link"><%= pages %></a></li>
+            <% } else { %>
+            <li class="page-item"><a class="page-link" href="/contacts/page/<%= pages %>"><%= pages %></a></li>
+            <% } %>
+            <% } %>
+        </ul>
+        <% } %>
+    </div>
+</div>
+<%- include('partials/footer') %>

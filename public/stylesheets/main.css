@@ -1,0 +1,40 @@
+body{
+    background-image: radial-gradient(rgba(65, 95, 157, 0.9),  rgba(65, 95, 157, 0.45), rgba(65, 95, 157, 0.2));
+}
+h1{
+    text-align: center;
+}
+.task-heading{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.display-4{
+    margin-top: 75px;
+}
+.card-header{
+    background-color: #415F9D;
+    color: whitesmoke;
+}
+.card-header:hover{
+    cursor: pointer;
+}
+.lead{
+    text-align: center;
+}
+.phone_add,.email_add{
+    margin: -15px 0;
+}
+::-webkit-input-placeholder,input{
+    text-align: center;
+}
+
+.input-group{
+    padding: 10px 0;
+}
+
+.input-group-text:hover{
+    cursor: pointer;
+}
+
+.add_contact a{
+    color: black;
+}
