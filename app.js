@@ -22,20 +22,6 @@ app.use(express.static(__dirname+"/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
-app.use(require("express-session")({
-    secret:"This statement needs to be the secret statement",
-    resave: false,
-    saveUninitialized: false
-}));
-
-//MIDDLEWARE
-app.use(function(req,res,next){
-    res.locals.error=req.flash("error");
-    res.locals.success=req.flash("success");
-    res.locals.info=req.flash("info");
-    next();
-})
-
 app.locals.moment=require('moment');
 
 //=========================================================================
